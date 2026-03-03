@@ -9,7 +9,6 @@ public class TransacaoRequest {
     
 
     @NotNull
-    @Min(0)
     private Double valor;
 
     @NotNull

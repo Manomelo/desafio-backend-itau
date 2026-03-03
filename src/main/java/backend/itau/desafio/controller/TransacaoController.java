@@ -26,7 +26,7 @@ public class TransacaoController {
 
     @PostMapping
     public ResponseEntity<Void> createTransacao(@Valid @RequestBody TransacaoRequest request ){
-        if(request.getDataHora().isAfter(OffsetDateTime.now())){
+        if(request.getDataHora().isAfter(OffsetDateTime.now()) || request.getValor() <= 0){
             return ResponseEntity.unprocessableContent().build();
         }
 
