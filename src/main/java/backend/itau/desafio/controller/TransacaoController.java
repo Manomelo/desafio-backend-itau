@@ -9,12 +9,11 @@ import jakarta.validation.Valid;
 import java.time.OffsetDateTime;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
 @RequestMapping("/transacao")
@@ -33,5 +32,11 @@ public class TransacaoController {
 
         transacaoService.addTransacao(new Transacao(request.getValor(), request.getDataHora()));
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> clearTransacoes(){
+        transacaoService.clearTransacoes();
+        return ResponseEntity.ok().build();
     }
 }
