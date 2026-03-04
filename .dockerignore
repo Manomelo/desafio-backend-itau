@@ -1,0 +1,12 @@
+target/
+.git/
+.gitignore
+.maven/
+README.md
+.vscode/
+.classpath
+.project
+.settings/
+*.log
+node_modules/
+.DS_Store

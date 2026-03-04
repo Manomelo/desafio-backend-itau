@@ -8,9 +8,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+/**
+ * Representa uma transação
+ */
 public class Transacao {
 
+    /** Valor da transacao. */
     private double valor;
+
+    /** Data e horario da transacao. */
     private OffsetDateTime dataHora;
 
     

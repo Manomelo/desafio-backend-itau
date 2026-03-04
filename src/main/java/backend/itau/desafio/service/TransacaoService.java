@@ -11,24 +11,40 @@ import backend.itau.desafio.model.Transacao;
 
 @Service
 public class TransacaoService {
-    
-    // Estrutura de dados para lidar com transacoes simultaneas
+
     private final Queue<Transacao> transacoes = new ConcurrentLinkedQueue<>();
 
-    public void addTransacao(Transacao trans){
+    /**
+     * Recebe uma transação e a adiciona a lista de transações
+     * 
+     * @param trans Transação a ser adicionada
+     */
+    public void addTransacao(Transacao trans) {
         transacoes.add(trans);
     }
 
-    public void clearTransacoes(){
+    /**
+     * Limpa a lista de transações por inteiro
+     * 
+     * 
+     */
+    public void clearTransacoes() {
         transacoes.clear();
     }
 
-    public DoubleSummaryStatistics getStatistics(){
-        OffsetDateTime now = OffsetDateTime.now();
+    /**
+     * Retorna estatisticas de todas as transações que ocorreram no último minuto
+     * 
+     * @return DoubleSummaryStatistics contendo contagem, soma, mínimo, máximo e média das transações válidadas pelo filtro
+     */
+    public DoubleSummaryStatistics getStatistics() {
+
+        OffsetDateTime minusOneMinute = OffsetDateTime.now().minusMinutes(1);
         return transacoes.stream()
-                .filter(t -> t.getDataHora().isAfter(now.minusSeconds(60)))
+                .filter(t -> t.getDataHora().isAfter(minusOneMinute))
                 .mapToDouble(Transacao::getValor)
                 .summaryStatistics();
 
     }
+
 }
